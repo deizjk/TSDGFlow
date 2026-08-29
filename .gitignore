@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.cache/
+.tmp/
+Data/
+save_near_index/
+checkpoint/
+logs/
+saved_loss/
+*.pt
+*.ckpt
+*.npy
+*.npz
