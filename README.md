@@ -1,14 +1,7 @@
 # TSDGFlow
 
-TSDGFlow is an unsupervised multivariate time-series anomaly detector built on
-USD and MTGFlow. It augments the temporal relation graph with a patch-wise
-frequency relation graph, fuses the two views, and uses one-way structural
-anchoring during training.
-
-This repository intentionally contains only the core implementation, dataset
-loaders, compact training/evaluation entry points, and selected pretrained
-models. Experiment sweeps, ablation runners, paper drafts, and raw logs are not
-included.
+TSDGFlow is an unsupervised method for multivariate time-series anomaly
+detection.
 
 ## Installation
 
@@ -74,7 +67,3 @@ python train.py \
 This implementation is derived from the public USD codebase, which is itself
 based on MTGFlow. Please cite those projects together with TSDGFlow when using
 this code.
-
-The upstream USD repository does not currently publish an explicit software
-license. Licensing permission must therefore be confirmed before this staging
-copy is made public.
