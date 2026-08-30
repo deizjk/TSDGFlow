@@ -55,7 +55,6 @@ python train.py \
   --name PSM --seed 18 --epoch 400 --batch_size 128 \
   --window_size 60 --stride_size 10 --n_blocks 1 --k 20 \
   --lr 0.002 --alpha 0.1 \
-  --loss_weight_manifold_ne 5 --loss_weight_manifold_po 1 \
   --freq_patch_size 16 --freq_patch_stride 8 \
   --spectral_gating_mode mlp \
   --graph_fusion_mode fixed_alpha --graph_alpha 0.7 \

@@ -65,8 +65,6 @@ parser.add_argument('--log_loss', type=bool, default=False)
 parser.add_argument('--v_latent', type=float, default=0.01)
 parser.add_argument('--alpha', type=float, default=0.5)
 parser.add_argument('--k', type=int, default=10)
-parser.add_argument('--loss_weight_manifold_po', type=float, default=0.1)
-parser.add_argument('--loss_weight_manifold_ne', type=float, default=0.1)
 parser.add_argument('--epoch', type=int, default=400)
 parser.add_argument('--use_spectral_graph', type=str2bool, default=True)
 parser.add_argument('--spectral_representation', type=str, default='real_imag',
@@ -226,14 +224,14 @@ for epoch in range(args.epoch):
         else:
             hid, loss, _, _ = model(x_all, )
 
-        loss_mani_po, loss_mani_ne = model.LossManifold(
+        loss_rep = model.LossManifold(
             input_data=x_all.reshape(x_all.shape[0], -1),
             latent_data=hid.reshape(x_all.shape[0], -1),
             v_input=100,
             v_latent=args.v_latent,
         )
 
-        total_loss = -loss + loss_mani_po * args.loss_weight_manifold_po + loss_mani_ne * args.loss_weight_manifold_ne
+        total_loss = -loss + loss_rep
 
         if args.x3_align_lambda > 0:
             # Align only on the unaugmented half (x_ori). Augmented windows are
@@ -453,8 +451,7 @@ for epoch in range(args.epoch):
             print('spectral_stats:', stats_text)
 
     # wandb.log({
-    #     'loss_mani_po': loss_mani_po,
-    #     'loss_mani_ne': loss_mani_ne,
+    #     'loss_rep': loss_rep,
     #     'loss_train': np.mean(loss_train),
     #     'loss_test': np.mean(loss_test),
     #     'roc_test_max': roc_max,

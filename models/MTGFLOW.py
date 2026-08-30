@@ -472,7 +472,9 @@ class MTGFLOWZL(nn.Module):
             P_=P_2[eye_mask == 0], Q_=Q_2[eye_mask == 0]
         )
         w1, w2 = 1 / (1 + w), w / (1 + w)
-        return w2 * loss_ce_nega, w1 * loss_ce_posi / batch_size
+        loss_rep_negative = w2 * loss_ce_nega
+        loss_rep_positive = w1 * loss_ce_posi / batch_size
+        return loss_rep_negative + 5.0 * loss_rep_positive
 
 
 class test(nn.Module):
